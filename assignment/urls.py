@@ -17,9 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from drf_spectacular.views import SpectacularAPIView,SpectacularSwaggerView
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('register/',views.register_page, name='register-page'),
+
+    path('login/', views.login_page , name='login-page'),
+
+    path('dashboard/', views.dashboard_page , name='dashboard-page'),
 
     path('api/accounts/',include('accounts.urls')),
 

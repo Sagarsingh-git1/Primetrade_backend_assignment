@@ -15,14 +15,14 @@ from accounts.serializers import SuccessSerializer
 
 
 class TaskListCreateAPIView(APIView):
-    permission_classes=[IsAuthenticated]
 
+    permission_classes=[IsAuthenticated]
 
     @extend_schema(
             request=TaskSerializer,
-            responses={200:TaskSerializer(many=True)}
+            responses={200:TaskSerializer(many = True)}
     )
-    def get(self,request):
+    def get(self, request):
 
         if request.user.role == "ADMIN":
 
@@ -48,7 +48,7 @@ class TaskListCreateAPIView(APIView):
             }
     )
     
-    def post(self,request):
+    def post(self, request):
 
         serializer=TaskSerializer(data = request.data)
 
@@ -66,7 +66,6 @@ class TaskListCreateAPIView(APIView):
 class TaskDetailAPIView(APIView):
     
     permission_classes=[IsAuthenticated]
-
 
     def get_object(self, pk, user):
 
@@ -89,7 +88,7 @@ class TaskDetailAPIView(APIView):
 
         serializer=TaskSerializer(task)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status = status.HTTP_200_OK)
     
     
     @extend_schema(
@@ -106,15 +105,15 @@ class TaskDetailAPIView(APIView):
             request.user
         )
 
-        serializer=TaskSerializer(instance=task,data=request.data,partial=True)
+        serializer=TaskSerializer(instance = task, data = request.data, partial = True)
 
         if serializer.is_valid():
 
             serializer.save() 
 
-            return Response({"message":f"Task {pk} updated successfully!"}, status=status.HTTP_200_OK)
+            return Response({"message":f"Task {pk} updated successfully!"}, status = status.HTTP_200_OK)
         
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
 
     @extend_schema(
@@ -122,7 +121,7 @@ class TaskDetailAPIView(APIView):
                 204:SuccessSerializer
             }
     )
-    def delete(self,request,pk):
+    def delete(self, request, pk):
 
         task=self.get_object(
             pk,
@@ -131,7 +130,7 @@ class TaskDetailAPIView(APIView):
 
         task.delete()
 
-        return Response({"message":"Your task has been deleted."},status=status.HTTP_204_NO_CONTENT)
+        return Response({"message":"Your task has been deleted."}, status = status.HTTP_204_NO_CONTENT)
         
 
 

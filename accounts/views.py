@@ -11,6 +11,8 @@ from .models import User
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.types import OpenApiTypes
 
+
+
 class RegisterAPIView(APIView):
 
     @extend_schema(
@@ -19,16 +21,16 @@ class RegisterAPIView(APIView):
                        400:OpenApiTypes.OBJECT}
     )
     def post(self,request):
-        serializer=RegistrationSerializer(data=request.data)
+        serializer=RegistrationSerializer(data = request.data)
 
         if serializer.is_valid():
 
             serializer.save()
 
-            return Response({"message":"Registration Successful."},status=status.HTTP_201_CREATED)
+            return Response({"message":"Registration Successful."}, status = status.HTTP_201_CREATED)
         
         
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors , status = status.HTTP_400_BAD_REQUEST)
     
 
 
@@ -36,8 +38,6 @@ class RegisterAPIView(APIView):
 class RoleUpdateAPIView(APIView):
 
     permission_classes=[IsAuthenticated,IsAdmin]
-
-
 
     @extend_schema(
             request=RoleUpdateSerializer,
@@ -56,8 +56,8 @@ class RoleUpdateAPIView(APIView):
 
         serializer=RoleUpdateSerializer(
             instance = user,
-            data=request.data,
-            partial=True
+            data = request.data,
+            partial = True
         )
         
         if serializer.is_valid():
@@ -68,6 +68,9 @@ class RoleUpdateAPIView(APIView):
                 status = status.HTTP_200_OK
             )
 
-        return Response( serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+        return Response( serializer.errors , status = status.HTTP_400_BAD_REQUEST)
     
+
+
+
 
