@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterAPIView,TestProtectedAPIView
+from .views import RegisterAPIView,RoleUpdateAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 
 
@@ -11,5 +11,5 @@ urlpatterns=[
 
     path('token/refresh/',TokenRefreshView.as_view()),
 
-    path('test/',TestProtectedAPIView.as_view(),name='test-protected-api')
+    path('role/<int:pk>/',RoleUpdateAPIView.as_view(), name='role-update')
 ]

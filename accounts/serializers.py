@@ -21,6 +21,23 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+    
+
+class RoleUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['role']
+
+
+
+
+class SuccessSerializer(serializers.Serializer):
+    message=serializers.CharField()
+
+
+
+
 
 
 

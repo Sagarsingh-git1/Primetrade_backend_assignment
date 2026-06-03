@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'tasks',
     'rest_framework',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'drf_spectacular'
 
 ]
 
@@ -141,5 +142,35 @@ REST_FRAMEWORK={
     'DEFAULT_AUTHENTICATION_CLASSES':(
 
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+
+    'DEFAULT_SCHEMA_CLASS' :(
+        'drf_spectacular.openapi.AutoSchema'
     )
+}
+
+
+# spectacular settings
+
+SPECTACULAR_SETTINGS={
+
+    'TITLE': 'Primetrade Backend Assignment API',
+    'DESCRIPTION': 'Backend assignment implementation demonstrating JWT Authentication, Role-Based Access Control, Task CRUD operations, PostgreSQL database design, API versioning, validation, and Swagger documentation.',
+    'VERSION': '1.0.0',
+
+    'SECURITY': [
+        {
+            'BearerAuth':[]
+        }
+    ],
+    
+    'COMPONENTS':{
+        'securitySchemes':{
+            'BearerAuth':{
+                'type':'http',
+                'scheme':'bearer',
+                'bearerFormat':'JWT'
+            }
+        }
+    }
 }
